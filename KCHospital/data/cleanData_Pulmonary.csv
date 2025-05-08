@@ -1,0 +1,13 @@
+pipeline,rowNumber,sourceType,ssn,lastName,firstName
+Pulmonary,1,Data/patient.csv,001,Sam,Yosemite
+Pulmonary,4,Data/patient.csv,004,Depp,Johnny
+Pulmonary,5,Data/patient.csv,005,Gaga,Lady
+Pulmonary,12,Data/patient.csv,010,Chan,Jackie
+Pulmonary,13,Data/patient.csv,011,Carey,Mariah
+Pulmonary,14,Data/patient.csv,012,Pitt,Brad
+Pulmonary,15,Data/patient.csv,013,Smith,Will
+Pulmonary,20,Data/patient.csv,016,Grande,Ariana
+Pulmonary,22,Data/patient.csv,018,Bieber,Justin
+Pulmonary,25,Data/patient.csv,111,Doo,Scooby
+Pulmonary,26,Data/patient.csv,222,Dinkey,Velma
+Pulmonary,27,Data/patient.csv,434,Star,Patrick

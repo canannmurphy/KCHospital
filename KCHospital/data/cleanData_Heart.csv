@@ -1,0 +1,8 @@
+pipeline,rowNumber,sourceType,ssn,lastName,firstName
+Heart,2,Data/patient.csv,002,Sanders,Bernie
+Heart,7,Data/patient.csv,007,Connery,Sean
+Heart,10,Data/patient.csv,008,Squarepants,Spongebob
+Heart,11,Data/patient.csv,009,Boop,Betty
+Heart,17,Data/patient.csv,014,Panther,Pink
+Heart,21,Data/patient.csv,017,Lopez,Jennifer
+Heart,23,Data/patient.csv,019,Duck,Donald

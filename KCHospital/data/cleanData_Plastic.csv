@@ -1,0 +1,5 @@
+pipeline,rowNumber,sourceType,ssn,lastName,firstName
+Plastic,3,Data/patient.csv,003,Bunny,Bugs
+Plastic,6,Data/patient.csv,006,Knowles,Beyonce
+Plastic,9,Data/patient.csv,021,Spears,Britney
+Plastic,18,Data/patient.csv,015,Brown,Charlie

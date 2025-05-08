@@ -1,0 +1,13 @@
+--- Invalid Records by Pipeline ---
+
+Pipeline: Plastic
+Row 16 (Source: Data/patient.csv)
+  Errors: [InvalidGlobalToken] [EmptyNotAllowed] 
+  Details: [ssn: Value is globally invalid] [lastName: Cannot be empty] 
+Row 19 (Source: Data/patient.csv)
+  Errors: [EmptyNotAllowed] 
+  Details: [lastName: Cannot be empty] 
+Row 24 (Source: Data/patient.csv)
+  Errors: [EmptyNotAllowed] 
+  Details: [lastName: Cannot be empty] 
+---
