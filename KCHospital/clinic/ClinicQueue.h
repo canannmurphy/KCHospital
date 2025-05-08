@@ -39,13 +39,12 @@ struct Patient
     }
 };
 
-class ClinicQueue
-{
+class ClinicQueue {
 private:
     Patient *head = nullptr;
     Patient *tail = nullptr;
     int size = 0;
-    const int MAX_SIZE = 11;
+    const int MAX_SIZE = 18;
 
 public:
     ClinicQueue() = default;
@@ -191,12 +190,15 @@ public:
         return false; // not found
     }
 
-    bool removeAndProcessPatient(const string &coordinator) {
+    Patient* removeAndProcessPatient(const string &patientID, const string &coordinator) {
         Patient *current = head;
         Patient *prev = nullptr;
 
         while (current) {
-            if (current->status == Assigned && current->assignedCoordinator == coordinator) {
+            if (current->patientID == patientID &&
+                current->status == Assigned &&
+                current->assignedCoordinator == coordinator) {
+
                 if (prev) {
                     prev->next = current->next;
                 } else {
@@ -205,22 +207,24 @@ public:
                 if (current == tail) {
                     tail = prev;
                 }
-                delete current;
                 size--;
-                return true;
+                return current;
             }
             prev = current;
             current = current->next;
         }
-        return false;
+        return nullptr;
     }
 
-    bool removeAndCancelPatient(const string &coordinator) {
+    Patient* removeAndCancelPatient(const string &patientID, const string &coordinator) {
         Patient *current = head;
         Patient *prev = nullptr;
 
         while (current) {
-            if (current->status == Assigned && current->assignedCoordinator == coordinator) {
+            if (current->patientID == patientID &&
+                current->status == Assigned &&
+                current->assignedCoordinator == coordinator) {
+
                 if (prev) {
                     prev->next = current->next;
                 } else {
@@ -229,14 +233,13 @@ public:
                 if (current == tail) {
                     tail = prev;
                 }
-                delete current;
                 size--;
-                return true;
+                return current;
             }
             prev = current;
             current = current->next;
         }
-        return false;
+        return nullptr;
     }
 
     Patient *findPatient(const string &patientID)

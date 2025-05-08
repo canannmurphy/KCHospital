@@ -14,7 +14,6 @@ private:
 
     void recordTransaction(const string &clinicCode, const string &coordinator, const Patient *patient, ActionType action)
     {
-
         Transaction t;
         t.timestamp = getCurrentTimestamp(); // assumes utility function
         t.coordinator = coordinator;
@@ -80,7 +79,7 @@ public:
         auto it = clinics.find(code);
         if (it != clinics.end()) {
             // Check if clinic is full
-            if (it->second.getSize() >= 10) {
+            if (it->second.getSize() >= 19) {
                 std::cerr << "⚠️ Cannot add patient: " << code << " clinic is at full capacity.\n";
                 return false;
             }
@@ -116,36 +115,38 @@ public:
         return nullptr;
     }
 
-    bool processAssignedPatient(const std::string& coordinator) {
+    Patient* processAssignedPatient(const std::string& coordinator) {
         Patient* patient = getAssignedPatient(coordinator);
-        if (!patient) return false;
-    
+        if (!patient) return nullptr;
+
         std::string clinic = patient->clinic;
+        std::string patientID = patient->patientID;
         auto it = clinics.find(clinic);
-        if (it == clinics.end()) return false;
-    
-        bool result = it->second.removeAndProcessPatient(coordinator);
-        if (result) {
-            recordTransaction(clinic, coordinator, patient, processed);
+        if (it == clinics.end()) return nullptr;
+
+        Patient* removed = it->second.removeAndProcessPatient(patientID, coordinator);
+        if (removed) {
+            recordTransaction(clinic, coordinator, removed, processed);
             coordinatorToPatient.erase(coordinator);
         }
-        return result;
+        return removed;
     }
-    
-    bool cancelAssignedPatient(const std::string& coordinator) {
+
+    Patient* cancelAssignedPatient(const std::string& coordinator) {
         Patient* patient = getAssignedPatient(coordinator);
-        if (!patient) return false;
-    
+        if (!patient) return nullptr;
+
         std::string clinic = patient->clinic;
+        std::string patientID = patient->patientID;
         auto it = clinics.find(clinic);
-        if (it == clinics.end()) return false;
-    
-        bool result = it->second.removeAndCancelPatient(coordinator);
-        if (result) {
-            recordTransaction(clinic, coordinator, patient, cancelled);
+        if (it == clinics.end()) return nullptr;
+
+        Patient* removed = it->second.removeAndCancelPatient(patientID, coordinator);
+        if (removed) {
+            recordTransaction(clinic, coordinator, removed, cancelled);
             coordinatorToPatient.erase(coordinator);
         }
-        return result;
+        return removed;
     }
 
     void printClinicPatients(const string &code, ostream &out, const Status *filter = nullptr) const
